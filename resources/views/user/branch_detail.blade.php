@@ -1,0 +1,285 @@
+@extends('nav')
+@section('content')
+  <!--Main Navigation-->
+  <header>
+    <!-- Intro settings -->
+    <style>
+      #intro {
+        /* Margin to fix overlapping fixed navbar */
+        margin-top: 58px;
+      }
+
+      @media (max-width: 991px) {
+        #intro {
+          /* Margin to fix overlapping fixed navbar */
+          margin-top: 45px;
+        }
+      }
+
+      .img-fluid{
+        border-radius: 50px;
+      }
+
+       /*----  Main Style  ----*/
+#cards_landscape_wrap-2{
+  text-align: center;
+  margin-top: -120px;
+  
+}
+#cards_landscape_wrap-2 .container{
+  padding-top: -30px; 
+  padding-bottom: 0px;
+}
+#cards_landscape_wrap-2 a{
+  text-decoration: none;
+  outline: none;
+}
+#cards_landscape_wrap-2 .card-flyer {
+  border-radius: 5px;
+}
+#cards_landscape_wrap-2 .card-flyer .image-box{
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.50);
+  border-radius: 5px;
+}
+#cards_landscape_wrap-2 .card-flyer .image-box img{
+  -webkit-transition:all .9s ease; 
+  -moz-transition:all .9s ease; 
+  -o-transition:all .9s ease;
+  -ms-transition:all .9s ease; 
+  width: 100%;
+  height: 200px;
+}
+#cards_landscape_wrap-2 .card-flyer:hover .image-box img{
+  opacity: 0.7;
+  -webkit-transform:scale(1.15);
+  -moz-transform:scale(1.15);
+  -ms-transform:scale(1.15);
+  -o-transform:scale(1.15);
+  transform:scale(1.15);
+}
+#cards_landscape_wrap-2 .card-flyer .text-box{
+  text-align: center;
+}
+#cards_landscape_wrap-2 .card-flyer .text-box .text-container{
+  padding: 20px 0px;
+}
+#cards_landscape_wrap-2 .card-flyer{
+  background: #FFFFFF;
+  margin-top: 50px;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.40);
+}
+#cards_landscape_wrap-2 .card-flyer:hover{
+  background: #fff;
+  box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  margin-top: 50px;
+}
+#cards_landscape_wrap-2 .card-flyer .text-box p{
+  margin-top: 10px;
+  margin-bottom: 0px;
+  padding-bottom: 0px; 
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #000000;
+}
+#cards_landscape_wrap-2 .card-flyer .text-box h6{
+  margin-top: 0px;
+  margin-bottom: 4px; 
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'Roboto Black', sans-serif;
+  letter-spacing: 1px;
+  color: #00acc1;
+}
+    </style>
+  </header>
+  <!--Main Navigation-->
+
+  <!--Main layout-->
+  <main class="mt-4 mb-5">
+    <div class="container">
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-md-8 offset-md-2 mb-4">
+          <!--Section: Post data-mdb-->
+          <section class="border-bottom mb-4">
+            <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(144).jpg"
+              class="img-fluid shadow-2-strong rounded mb-4" alt="" />
+
+            <div class="row align-items-center mb-4">
+              <div class="col-lg-6 text-center text-lg-start mb-3 m-lg-0">
+                <img src="{{ asset('img/store.png') }}" class="rounded shadow-1-strong me-2"
+                  height="35" alt="" loading="lazy" />
+                <span style="font-size:22px;"><b>{{$branch->username}}</b></span>
+                <h6>{{$branch->address}}</h6>
+                <h6>{{$branch->phone}}</h6>
+              </div>
+
+              <div class="col-lg-6 text-center text-lg-end">
+                <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init
+                  style="background-color: #3b5998;">
+                  <i class="fab fa-facebook-f"></i>
+                </button>
+                <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init
+                  style="background-color: #55acee;">
+                  <i class="fab fa-twitter"></i>
+                </button>
+                <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init
+                  style="background-color: #0082ca;">
+                  <i class="fab fa-linkedin"></i>
+                </button>
+                <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init>
+                  <i class="fas fa-comments"></i>
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+    </div>
+  </main>
+  <!--Main layout-->
+  <!-- Topic Cards -->
+  
+  <div id="cards_landscape_wrap-2">
+        <div class="container">
+            <div class="row">
+            @foreach ($products as $cont)
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <a href="/post-detail">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box">
+                                    <img src="{{ asset('img/store.png') }}" alt="" />
+                                </div>
+                                <div class="text-container">
+                                  <div style="text-align:justify;">
+                                  <div class="row">
+                                    <div class="col-md-2"><img style="padding-left:20px;" class="icon" src="{{ asset('img/product.png') }}" alt="img"/></div>
+                                    <div class="col-md-10"><h5>{{$cont->name}}</h5></div>
+                                  </div>
+                                  
+                                    <hr>
+                                    <div class="row">
+                                    <div class="col-md-2"><img style="padding-left:20px;" class="icon" src="{{ asset('img/price-tag.png') }}" alt="img"/></div>
+                                    <div class="col-md-10"><span>1200 Kyats</span></div>
+                                  </div>
+                                    
+                                    <p style="text-align:justify;padding-left:20px;padding-right:20px;">&nbsp;&nbsp;&nbsp;{{$cont->short_description}}....</p>
+                                  </div>
+                                    <br/>
+                                    <form action="{{ route('add-to-card') }}" method="post">
+                                      @csrf
+                                      <input type="hidden" name="product_id" value="{{$cont->id}}">
+                                      <input type="hidden" name="branch_id" value="{{$branch->id}}">
+                                    <button type="submit" class="btn btn-primary">Add to card</button>
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+                
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <a href="">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box">
+                                    <img src="https://cdn.pixabay.com/photo/2018/04/09/19/55/low-poly-3305284_960_720.jpg" alt="" />
+                                </div>
+                                <div class="text-container">                                    
+                                    <h6>Title 02</h6>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                    <br/>
+                                    <button type="button" class="btn btn-primary">Add to card</button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <a href="">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box">
+                                    <img src="https://cdn.pixabay.com/photo/2018/04/06/13/46/poly-3295856_960_720.png" alt="" />
+                                </div>
+
+                                <div class="text-container">
+                                    <h6>Title 03</h6>
+                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                   <br/>
+                                    <button type="button" class="btn btn-primary">Add to card</button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <a href="">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box">
+                                    <img src="https://cdn.pixabay.com/photo/2018/03/30/15/12/dog-3275593_960_720.jpg" alt="" />
+                                </div>
+                                <div class="text-container">
+                                    <h6>Title 04</h6>
+                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                   <br/>
+                                    <button type="button" class="btn btn-primary">Add to card</button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <a href="">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box">
+                                    <img src="https://cdn.pixabay.com/photo/2018/03/30/15/12/dog-3275593_960_720.jpg" alt="" />
+                                </div>
+                                <div class="text-container">
+                                    <h6>Title 04</h6>
+                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <a href="">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box">
+                                    <img src="https://cdn.pixabay.com/photo/2018/03/30/15/12/dog-3275593_960_720.jpg" alt="" />
+                                </div>
+                                <div class="text-container">
+                                    <h6>Title 04</h6>
+                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+       </div>
+@endsection
