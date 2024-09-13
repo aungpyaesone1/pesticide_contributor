@@ -110,13 +110,19 @@
   <!--Main layout-->
   <main class="mt-4 mb-5">
     <div class="container">
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
       <!--Grid row-->
       <div class="row">
         <!--Grid column-->
         <div class="col-md-8 offset-md-2 mb-4">
           <!--Section: Post data-mdb-->
           <section class="border-bottom mb-4">
-            <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(144).jpg"
+            <img src="{{$branch->image}}"
               class="img-fluid shadow-2-strong rounded mb-4" alt="" />
 
             <div class="row align-items-center mb-4">
@@ -132,14 +138,6 @@
                 <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init
                   style="background-color: #3b5998;">
                   <i class="fab fa-facebook-f"></i>
-                </button>
-                <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init
-                  style="background-color: #55acee;">
-                  <i class="fab fa-twitter"></i>
-                </button>
-                <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init
-                  style="background-color: #0082ca;">
-                  <i class="fab fa-linkedin"></i>
                 </button>
                 <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init>
                   <i class="fas fa-comments"></i>
@@ -165,7 +163,7 @@
                         <div class="card-flyer">
                             <div class="text-box">
                                 <div class="image-box">
-                                    <img src="{{ asset('img/store.png') }}" alt="" />
+                                    <img src="{{$cont->image}}" alt="" />
                                 </div>
                                 <div class="text-container">
                                   <div style="text-align:justify;">
@@ -177,7 +175,7 @@
                                     <hr>
                                     <div class="row">
                                     <div class="col-md-2"><img style="padding-left:20px;" class="icon" src="{{ asset('img/price-tag.png') }}" alt="img"/></div>
-                                    <div class="col-md-10"><span>1200 Kyats</span></div>
+                                    <div class="col-md-10"><span>{{$cont->price}} Kyats</span></div>
                                   </div>
                                     
                                     <p style="text-align:justify;padding-left:20px;padding-right:20px;">&nbsp;&nbsp;&nbsp;{{$cont->short_description}}....</p>
@@ -196,90 +194,18 @@
                     </a>
                 </div>
             @endforeach
-                
-                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                    <a href="">
-                        <div class="card-flyer">
-                            <div class="text-box">
-                                <div class="image-box">
-                                    <img src="https://cdn.pixabay.com/photo/2018/04/09/19/55/low-poly-3305284_960_720.jpg" alt="" />
-                                </div>
-                                <div class="text-container">                                    
-                                    <h6>Title 02</h6>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                    <br/>
-                                    <button type="button" class="btn btn-primary">Add to card</button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                    <a href="">
-                        <div class="card-flyer">
-                            <div class="text-box">
-                                <div class="image-box">
-                                    <img src="https://cdn.pixabay.com/photo/2018/04/06/13/46/poly-3295856_960_720.png" alt="" />
-                                </div>
-
-                                <div class="text-container">
-                                    <h6>Title 03</h6>
-                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                   <br/>
-                                    <button type="button" class="btn btn-primary">Add to card</button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                    <a href="">
-                        <div class="card-flyer">
-                            <div class="text-box">
-                                <div class="image-box">
-                                    <img src="https://cdn.pixabay.com/photo/2018/03/30/15/12/dog-3275593_960_720.jpg" alt="" />
-                                </div>
-                                <div class="text-container">
-                                    <h6>Title 04</h6>
-                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                   <br/>
-                                    <button type="button" class="btn btn-primary">Add to card</button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                    <a href="">
-                        <div class="card-flyer">
-                            <div class="text-box">
-                                <div class="image-box">
-                                    <img src="https://cdn.pixabay.com/photo/2018/03/30/15/12/dog-3275593_960_720.jpg" alt="" />
-                                </div>
-                                <div class="text-container">
-                                    <h6>Title 04</h6>
-                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                    <a href="">
-                        <div class="card-flyer">
-                            <div class="text-box">
-                                <div class="image-box">
-                                    <img src="https://cdn.pixabay.com/photo/2018/03/30/15/12/dog-3275593_960_720.jpg" alt="" />
-                                </div>
-                                <div class="text-container">
-                                    <h6>Title 04</h6>
-                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
             </div>
         </div>
        </div>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // This script will automatically close the alert after 5 seconds
+    setTimeout(function() {
+        let alert = document.querySelector('.alert');
+        if (alert) {
+            let bootstrapAlert = new bootstrap.Alert(alert);
+            bootstrapAlert.close();
+        }
+    }, 5000); // 5000 milliseconds = 5 seconds
+</script>
 @endsection

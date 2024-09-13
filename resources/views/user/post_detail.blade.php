@@ -28,8 +28,8 @@
         <div class="col-md-8 offset-md-2 mb-4">
           <!--Section: Post data-mdb-->
           <section class="border-bottom mb-4">
-            <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(144).jpg"
-              class="img-fluid shadow-2-strong rounded mb-4" alt="" />
+            <img src="{{$post->image}}"
+              class="img-fluid shadow-2-strong rounded mb-4" alt=""/>
 
             <div class="row align-items-center mb-4">
               <div class="col-lg-6 text-center text-lg-start mb-3 m-lg-0">
@@ -44,14 +44,6 @@
                 <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init
                   style="background-color: #3b5998;">
                   <i class="fab fa-facebook-f"></i>
-                </button>
-                <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init
-                  style="background-color: #55acee;">
-                  <i class="fab fa-twitter"></i>
-                </button>
-                <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init
-                  style="background-color: #0082ca;">
-                  <i class="fab fa-linkedin"></i>
                 </button>
                 <button type="button" class="btn btn-primary px-3 me-1" data-mdb-ripple-init>
                   <i class="fas fa-comments"></i>

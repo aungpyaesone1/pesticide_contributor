@@ -13,24 +13,19 @@
 <div class="form-row">
 <div class="form-group col-md-6">
 <label for="inputEmail4">Title</label>
+<input type="hidden" name="postId" value="{{$post->id}}">
 <input type="text" name="title" class="form-control" id="inputEmail4" placeholder="Title" value="{{$post->title}}">
 </div>
 </div>
 
 <div class="form-group">
 <label for="inputAddress">Description</label>
-<textarea type="text" name="description" class="form-control" id="inputAddress">{{$post->description}}</textarea>
+<textarea style="height:300px;" type="text" name="description" class="form-control" id="inputAddress">{{$post->description}}</textarea>
 </div>
-<div class="form-group">
-<div class="form-check">
-<input class="form-check-input" type="checkbox" id="gridCheck">
-<label class="form-check-label" for="gridCheck">
-Check me out
-</label>
-</div>
-</div>
-<button type="submit" class="btn btn-primary">Create</button>
+
+
 <a href="/admin/post" class="btn btn-secondary">Cancel</a>
+<button type="submit" class="btn btn-primary">Update</button>
 </form>
     </div>
 @endsection

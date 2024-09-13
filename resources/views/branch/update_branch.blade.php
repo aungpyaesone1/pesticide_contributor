@@ -62,16 +62,10 @@
 </select>
 </div>
 </div>
-<div class="form-group">
-<div class="form-check">
-<input class="form-check-input" type="checkbox" id="gridCheck">
-<label class="form-check-label" for="gridCheck">
-Check me out
-</label>
-</div>
-</div>
-<button type="submit" class="btn btn-primary">Update</button>
+
+
 <a href="/admin/branch" class="btn btn-secondary">Cancel</a>
+<button type="submit" class="btn btn-primary">Update</button>
 </form>
     </div>
 @endsection

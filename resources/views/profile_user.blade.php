@@ -1,9 +1,13 @@
-@extends('welcome')
+@extends('nav')
 @section('content')
 <div class="container">
+@if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 <div class="row flex-lg-nowrap">
-  
-
   <div class="col">
     <div class="row">
       <div class="col mb-3">
@@ -38,6 +42,9 @@
                   @if(auth()->user()->role_id == 2)
                     <span class="badge badge-secondary">Branch</span>
                   @endif
+                  @if(auth()->user()->role_id == 3)
+                    <span class="badge badge-secondary">User</span>
+                  @endif
                 
 
                     <div class="text-muted"><small>Joined {{auth()->user()->created_at}}</small></div>
@@ -49,20 +56,21 @@
               </ul>
               <div class="tab-content pt-3">
                 <div class="tab-pane active">
-                  <form class="form" novalidate="">
+                  <form class="form" method="post" action="{{ route('update-profile') }}">
+                    @csrf
                     <div class="row">
                       <div class="col">
                         <div class="row">
                           <div class="col">
                             <div class="form-group">
                               <label>Username</label>
-                              <input class="form-control" type="text" name="name" placeholder="John Smith" value="{{auth()->user()->username}}">
+                              <input class="form-control" type="text" name="username" placeholder="" value="{{auth()->user()->username}}">
                             </div>
                           </div>
                           <div class="col">
                             <div class="form-group">
                               <label>Phone</label>
-                              <input class="form-control" type="text" name="username" placeholder="johnny.s" value="{{auth()->user()->phone}}">
+                              <input class="form-control" type="text" name="phone" placeholder="" value="{{auth()->user()->phone}}">
                             </div>
                           </div>
                         </div>
@@ -70,7 +78,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>City</label>
-                              <select class="form-control" type="text" name="name" placeholder="John Smith">
+                              <select class="form-control" type="text" name="cityId" placeholder="">
                                 <option>Pwintbyu</option>
                               </select>
                             </div>
@@ -78,7 +86,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Township</label>
-                              <select class="form-control" type="text" name="username" placeholder="johnny.s">
+                              <select class="form-control" type="text" name="townshipId" placeholder="">
                                 <option>Magway</option>
                               </select>
                             </div>
@@ -88,7 +96,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Address</label>
-                              <textarea class="form-control" type="text" placeholder="">{{auth()->user()->address}}</textarea>
+                              <textarea class="form-control" type="text" name="address" placeholder="">{{auth()->user()->address}}</textarea>
                             </div>
                           </div>
                         </div>
@@ -102,6 +110,9 @@
                         </div>
                       </div>
                     </div>
+                    <div class="col d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                      </div>
                     <!--<div class="row">
                       <div class="col-12 col-sm-6 mb-3">
                         <div class="mb-2"><b>Change Password</b></div>
@@ -129,13 +140,13 @@
                           </div>
                         </div>
                       </div>
-                    
-                    </div>-->
+                      
+                    </div>
                     <div class="row">
                       <div class="col d-flex justify-content-end">
                         <button class="btn btn-primary" type="submit">Save Changes</button>
                       </div>
-                    </div>
+                    </div>-->
                   </form>
 
                 </div>
@@ -149,4 +160,15 @@
   </div>
 </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // This script will automatically close the alert after 5 seconds
+    setTimeout(function() {
+        let alert = document.querySelector('.alert');
+        if (alert) {
+            let bootstrapAlert = new bootstrap.Alert(alert);
+            bootstrapAlert.close();
+        }
+    }, 5000); // 5000 milliseconds = 5 seconds
+</script>
 @endsection

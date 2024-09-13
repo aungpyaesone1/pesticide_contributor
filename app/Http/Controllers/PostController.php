@@ -42,7 +42,7 @@ class PostController extends Controller
 
         // Handle the response as needed
         $imageUrl = $result['data']['url'];
-        Post::where("id", $request->id)->first()->update(array('title'=>$request->name,'description'=>$request->description, 'image'=>$imageUrl));
+        Post::where("id", $request->postId)->first()->update(array('title'=>$request->title,'description'=>$request->description, 'image'=>$imageUrl));
         return redirect('/admin/post')->with('success','Post has been created successfully.');
     }
 

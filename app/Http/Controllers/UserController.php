@@ -12,6 +12,8 @@ use App\Models\Post;
 use App\Models\Order;
 use App\Models\OrderItem;
 use DB;
+use App\Mail\PushMail;
+use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
     public function home() {
@@ -90,9 +92,7 @@ class UserController extends Controller
             'user_id' => $userId,
             'count' => 1
         ]);
-        return back()->withErrors([
-            'success' => 'Item have been successfully added.',
-        ]);
+        return back()->with('success', 'Item have been successfully added.');
     }
 
     public function cards() {
@@ -140,10 +140,50 @@ class UserController extends Controller
                 'status' => 1
             ]);
         }
-        return view('user.order_list');
+        DB::table('cards')->where('user_id', '=', $userId)->delete();
+        $title = 'Welcome to University Magazine';
+        $body = 'Please check your account. you have new contribution in your department!';
+        Mail::to($coordinator->email)->send(new PushMail($title, $body));
+        return redirect('/orders')->with('success', 'Your order have been placed successfully.');
     }
 
     public function orderList() {
-        return view('user.order_list');
+        $id = auth()->user()->id;
+        $orders = DB::table('orders')
+        ->join('users', 'users.id', '=', 'orders.user_id')
+        ->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')
+        ->select('orders.*', 'users.username', DB::raw('COUNT(order_items.id) as itemCount'))
+        ->where('orders.user_id', $id)
+        ->groupBy('orders.id', 'users.username')
+        ->get();
+    
+        //dd($orders);
+        return view('user.order_list')->with('orders', $orders);
+    }
+
+    public function orderDetail($id) {
+        $user_id = auth()->user()->id;
+        $orderDetail = DB::table('orders')
+        ->join('users', 'users.id', '=', 'orders.user_id')
+        ->leftjoin('order_items', 'orders.id', '=', 'order_items.order_id')
+        ->select('orders.*', 'orders.status as orderStatus','users.username', 'users.address','users.phone', 'order_items.*')
+        ->where('orders.id', $id)
+        ->get();
+
+        $order_items = DB::table('order_items')
+        ->leftjoin('products', 'products.id', '=', 'order_items.product_id')
+        ->join('categories', 'categories.id', '=', 'products.category_id')
+        ->select('order_items.*', 'products.name','products.image','products.description','categories.name as category',
+        DB::raw('products.price * order_items.count as price'))
+        ->where('order_items.order_id', $id)
+        ->get();
+
+        $item_count = DB::table('order_items')
+        ->select(DB::raw('COUNT(order_items.id) as item_count'))
+        ->where('order_items.order_id', $id)
+        ->get();
+        //dd($orderDetail[0]);
+        //dd($item_count[0]);
+        return view("user.order_detail")->with("order", $orderDetail[0])->with('order_items', $order_items)->with("item_count", $item_count[0]);
     }
 }

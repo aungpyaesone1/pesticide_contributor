@@ -3,10 +3,8 @@
 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Branch</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Manage Branch</h1>
+                    <p class="mb-4"></p>
                     <button class="btn btn-primary pull-right" onclick="window.location='/admin/create-branch'">Create</button>
 
                     <!-- DataTales Example -->
@@ -19,26 +17,29 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            
+                                        <th>Picture</th>
                                             <th>Username</th>
                                             <th>Phone</th>
                                             <th>Address</th>
                                             <th>City</th>
                                             <th>Township</th>
                                             <th>Start Date</th>
-                                        
+                                            <th>Action</th>
+                                    
+        
                                         </tr>
                                     </thead>
                                     <tfoot>
                                     
                                         <tr>
+                                        <th>Picture</th>
                                             <th>Username</th>
                                             <th>Phone</th>
                                             <th>Address</th>
                                             <th>City</th>
                                             <th>Township</th>
                                             <th>Start Date</th>
-                                            
+                                            <th>Action</th>
                                         </tr>
                                     
                                     </tfoot>
@@ -47,13 +48,14 @@
                                         @foreach ($branchs as $cont)
                                         
                                         <tr>
-                    
+                                        <th><img src="{{$cont->image}}" style="width:100px;height:100px;border:1px solid gray;border-radius:5px;"></th>
                     <th><a href="/admin/branch/{{ $cont->id }}">{{ $cont->username }}</a></th>
                     <th>{{ $cont->phone }}</th>
                     <th>{{ $cont->address }}</th>
                     <th>{{$cont->cityName}}</th>
                     <th>{{$cont->townshipName}}</th>
                     <th>{{$cont->created_at}}</th>
+                    <th><button class="btn btn-sm btn-danger">Delete</button></th>
                 </tr>
                 
                                         @endforeach

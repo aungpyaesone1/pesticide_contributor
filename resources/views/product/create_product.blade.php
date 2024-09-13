@@ -35,18 +35,11 @@
 
 <div class="form-group">
 <label for="inputAddress">Description</label>
-<textarea type="text" name="description" class="form-control" id="inputAddress"></textarea>
+<textarea style="height:300px;" type="text" name="description" class="form-control" id="inputAddress"></textarea>
 </div>
-<div class="form-group">
-<div class="form-check">
-<input class="form-check-input" type="checkbox" id="gridCheck">
-<label class="form-check-label" for="gridCheck">
-Check me out
-</label>
-</div>
-</div>
-<button type="submit" class="btn btn-primary">Create</button>
+
 <a href="/admin/product" class="btn btn-secondary">Cancel</a>
+<button type="submit" class="btn btn-primary">Create</button>
 </form>
     </div>
 @endsection

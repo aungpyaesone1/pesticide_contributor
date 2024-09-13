@@ -2,50 +2,73 @@
 @section('content')
 <div>
 <div class="container">
+@if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
   <table id="cart" class="table table-hover table-condensed">
     <thead>
       <tr>
-        <th style="width:50%">Product</th>
-        <th style="width:10%">Price</th>
-        <th style="width:8%">Quantity</th>
-        <th style="width:22%" class="text-center">Subtotal</th>
-        <th style="width:10%"></th>
+        <th>Order ID</th>
+        <th>Date</th>
+        <th>Total Item</th>
+        <th>Total Price</th>
+        <th>Status</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
+    @if (count($orders) > 0)
+      @foreach ($orders as $cont)
       <tr>
         <td data-th="Product">
           <div class="row">
-            <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" /></div>
-            <div class="col-sm-10">
-              <h4 class="nomargin">Product 1</h4>
-              <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
-            </div>
+          <a href="order-detail/{{ $cont->id }}">
+            {{$cont->id}}
+          </a>
           </div>
         </td>
-        <td data-th="Price">$1.99</td>
+        <td data-th="Price">{{$cont->created_at}}</td>
         <td data-th="Quantity">
-          <input type="number" class="form-control text-center" value="1">
+          {{$cont->itemCount}}
         </td>
-        <td data-th="Subtotal" class="text-center">1.99</td>
+        <td data-th="Subtotal">{{$cont->total_price}}</td>
+        <td data-th="Subtotal">
+          
+          @if($cont->status == 1)
+          Not Confirmed
+          @elseif($cont->status == 2)
+          Confirmed
+          @elseif($cont->status == 3)
+          Delivered
+          @else
+          Paid
+          @endif
+
+        </td>
         <td class="actions" data-th="">
           <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-          <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+          
         </td>
       </tr>
+      @endforeach
+    @endif
+      
     </tbody>
-    <tfoot>
-      <tr class="visible-xs">
-        <td class="text-center"><strong>Total 1.99</strong></td>
-      </tr>
-      <tr>
-        <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-        <td colspan="2" class="hidden-xs"></td>
-        <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
-        <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
-      </tr>
-    </tfoot>
   </table>
 </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // This script will automatically close the alert after 5 seconds
+    setTimeout(function() {
+        let alert = document.querySelector('.alert');
+        if (alert) {
+            let bootstrapAlert = new bootstrap.Alert(alert);
+            bootstrapAlert.close();
+        }
+    }, 5000); // 5000 milliseconds = 5 seconds
+</script>
 @endsection

@@ -52,8 +52,8 @@
       <!-- Navbar brand -->
       <a class="navbar-brand mt-2 mt-lg-0" href="#">
         <img
-          src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-          height="15"
+          src="{{asset('img/chemical (1).png')}}"
+          height="40"
           alt="MDB Logo"
           loading="lazy"
         />
@@ -67,7 +67,7 @@
           <a class="nav-link" href="/branch">Branch</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Product</a>
+          <a class="nav-link" href="/orders">Order</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
@@ -123,7 +123,7 @@
           aria-expanded="false"
         >
           <img
-            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+            src="{{ asset('img/undraw_profile.svg') }}"
             class="rounded-circle"
             height="25"
             alt="Black and White Portrait of a Man"
@@ -135,7 +135,10 @@
           aria-labelledby="navbarDropdownMenuAvatar"
         >
           <li>
-            <a class="dropdown-item" href="/profile">My profile</a>
+            <a class="dropdown-item" href="/user-profile">My profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="/orders">Order</a>
           </li>
           <li>
             <a class="dropdown-item" href="#">Settings</a>

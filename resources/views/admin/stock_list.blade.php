@@ -4,9 +4,7 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Manage Stock</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
+                    <p class="mb-4"></p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -18,7 +16,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            
+                                            <th>Picture</th>
                                             <th>Branch Name</th>
                                             <th>Product Count</th>
                                             <th>Request Count</th>
@@ -27,6 +25,7 @@
                                     <tfoot>
                                     
                                         <tr>
+                                        <th>Picture</th>
                                         <th>Branch Name</th>
                                             <th>Product Count</th>
                                             <th>Request Count</th>
@@ -39,7 +38,7 @@
                                         @foreach ($stocks as $cont)
                                         
                                         <tr>
-                    
+                                        <th><img src="{{$cont->image}}" style="width:100px;height:100px;border:1px solid gray;border-radius:5px;"></th>
                     <th><a href="/admin/manage-stock/{{ $cont->id }}">{{ $cont->username }}</a></th>
                     <th>{{ $cont->productCount }}</th>
                     <th>{{ $cont->requestCount }}</th>

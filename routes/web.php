@@ -15,11 +15,13 @@ Route::controller(AuthenticationController::class)->group(function() {
     Route::get('/register', 'registerView');
     Route::post('/register', 'register')->name('post-register');
     Route::get('/profile', 'profile');
+    Route::get('/user-profile', 'userProfile');
+    Route::post('/update-profile', 'updateProfile')->name('update-profile');
     Route::get('/logout', 'logout')->name('logout');
 });
 
 Route::controller(AdminController::class)->group(function() {
-    Route::get('admin/dashboard', 'dashboard');
+    Route::get('admin/dashboard', 'dashboard')->name('admindashboard');
     Route::get('admin/branch', 'branch');
     Route::get('admin/create-branch', 'createBranch');
     Route::get('admin/update-branch', 'updateBranch');
@@ -37,6 +39,7 @@ Route::controller(AdminController::class)->group(function() {
 
     Route::get('admin/stock', 'stock');
     Route::get('admin/manage-stock/{id}', 'manageStock');
+    
     Route::post('add-stock', 'addStock')->name('add-stock');
     Route::post('accept-request', 'acceptStockRequest')->name('accept-request');
 });
@@ -45,6 +48,7 @@ Route::controller(BranchController::class)->group(function() {
     Route::post('/branch', 'createBranch')->name('branch');
     Route::post('/updatebranch', 'updateBranch')->name('updatebranch');
     Route::get('/branch/{brach}/delete', 'deleteBranch')->name('branch-delete');
+    
 });
 
 Route::controller(ProductController::class)->group(function() {
@@ -58,9 +62,12 @@ Route::controller(PostController::class)->group(function() {
 });
 
 Route::controller(BranchUserController::class)->group(function() {
-    Route::get('branch-user/dashboard', 'dashboard');
+    Route::get('branch-user/dashboard', 'dashboard')->name("branchdashboard");
     Route::get('branch-user/stock', 'stock');
+    Route::get('branch-user/order', 'orders');
+    Route::get('branch-user/order-detail/{id}', 'orderDetail');
     Route::post('request-stock', 'requestStock')->name('request-stock');
+    Route::post('update-order', 'updateOrder')->name('update-order');
 });
 
 Route::controller(UserController::class)->group(function() {
@@ -73,11 +80,16 @@ Route::controller(UserController::class)->group(function() {
     Route::get('/remove-item/{id}', 'removeItem');
     Route::post('/checkout', 'checkOut')->name('checkout');
     Route::get('/orders', 'orderList');
+    Route::get('order-detail/{id}', 'orderDetail');
 });
 
 Route::get('/', function () {
     return view('user.home');
 });
+Route::get('/order-detail', function () {
+    return view('user.order_detail');
+});
+
 
 
 Route::get('/branch-detail', function () {

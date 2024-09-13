@@ -11,11 +11,39 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Stock;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
-    public function dashboard() {
-        return view('admin.dashboard');
+    public function dashboard(Request $request) {
+        $startDate = $request->input('start_date') ? $request->input('start_date') : Carbon::now()->startOfMonth()->toDateString();
+        $endDate = $request->input('end_date') ? $request->input('end_date') : Carbon::now()->endOfMonth()->toDateString();
+        $branchId = auth()->user()->id;
+        $salesReport = DB::table('order_items')
+        ->join('products', 'order_items.product_id', '=', 'products.id')
+        ->join('orders', 'order_items.order_id', '=', 'orders.id')
+        ->whereBetween('orders.created_at', [$startDate, $endDate])
+        ->where('orders.status', 4)
+        ->select('products.name', DB::raw('SUM(order_items.count) as total_quantity'), DB::raw('SUM(order_items.price * order_items.count) as total_sales'))
+        ->groupBy('products.name')
+        ->get();
+        //dd($salesReport);
+        
+        $productsNotOrdered = DB::table('products')
+    ->select('products.name')
+    ->groupBy('products.name')
+    ->get();
+    // Example criteria to exclude specific product names
+ // Example product names to exclude
+$excludedProducts = $salesReport->pluck('name');
+$excludedProducts = $excludedProducts->toArray();
+$productsNotOrdered = $productsNotOrdered->reject(function ($product) use ($excludedProducts) {
+    return in_array($product->name, $excludedProducts);
+});
+    //dd($productsNotOrdered);
+
+
+        return view('admin.dashboard')->with("saleReport", $salesReport)->with("productNotOrder", $productsNotOrdered);
     }
 
     public function branch() {
@@ -68,7 +96,7 @@ class AdminController extends Controller
     public function post() {
         $posts = DB::table('posts')
         ->where('posts.status', 1)
-        ->select('posts.*')
+        ->select('posts.*', DB::raw('SUBSTRING(posts.description, 1, 200) as description'))
         ->get();
         return view('post.post')->with('posts', $posts);
     }
@@ -85,7 +113,7 @@ class AdminController extends Controller
     public function stock() {
         $stocks = DB::table('stocks')
                     ->join('users', 'users.id', '=', 'stocks.branch_id')
-                    ->select('users.id','users.username', DB::raw('COUNT(*) as productCount'), DB::raw('COUNT(CASE WHEN stocks.request_count != 0 THEN 1 END) as requestCount'))
+                    ->select('users.id','users.username','users.image', DB::raw('COUNT(*) as productCount'), DB::raw('COUNT(CASE WHEN stocks.request_count != 0 THEN 1 END) as requestCount'))
                     ->groupBy('stocks.branch_id')
                     ->get();
         return view('admin.stock_list')->with("stocks", $stocks);

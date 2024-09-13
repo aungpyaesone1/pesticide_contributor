@@ -19,8 +19,10 @@ class AuthenticationController extends Controller
             'username' => 'required',
             'password' => 'required'
         ]);
+        //dd(Auth::attempt($credentials));
         if(Auth::attempt($credentials))
         {
+            
             $request->session()->regenerate();
             if(Auth::user()->role_id == 1) {
                 return redirect('admin/dashboard')
@@ -41,7 +43,7 @@ class AuthenticationController extends Controller
             }
         }
         return back()->withErrors([
-            'email' => 'Your provided credentials do not match in our records.',
+            'error' => 'Username or password is incorrect.',
         ]);
     }
 
@@ -81,6 +83,17 @@ class AuthenticationController extends Controller
 
     public function profile() {
         return view('profile');
+    }
+    public function userProfile() {
+        return view('profile_user')->with('success', '');
+    }
+
+    public function updateProfile(Request $request) {
+        $id = auth()->user()->id;
+        
+        $user = User::select('username')->whereNot('id', $request->id)->where('phone', $request->phone)->first();
+        User::where("id", $id)->first()->update(array('username'=>$request->username, 'phone'=>$request->phone, 'address'=>$request->address));
+        return redirect('/user-profile')->with('success','Profile has been updated successfully.');
     }
 
     public function logout() {
