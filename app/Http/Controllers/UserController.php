@@ -11,6 +11,7 @@ use App\Models\Township;
 use App\Models\Post;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Comment;
 use DB;
 use App\Mail\PushMail;
 use Illuminate\Support\Facades\Mail;
@@ -22,6 +23,10 @@ class UserController extends Controller
     ->select('posts.*', DB::raw('SUBSTRING(posts.description, 1, 200) as short_description'))
     ->get();
         return view('user.home')->with('posts', $posts);
+    }
+
+    public function about () {
+        return view('about');
     }
 
     public function postDetail($id) {
@@ -79,8 +84,28 @@ class UserController extends Controller
         return view('user.branch_detail')->with("branch", $branch[0])->with("products", $products);
     }
 
-    public function addToCard(Request $request) {
+    public function productDetail($branch_id, $id) {
+        //$branchs = User::where("role_id", 2)->get();
+        $product = DB::table('products')
+            ->join('categories', 'products.category_id', '=', 'categories.id')// joining the contacts table , where user_id and contact_user_id are same
+            ->where('products.status', 1)
+            ->where('products.id', $id)
+            ->select('products.*', 'categories.name as categoryName')
+            ->get()->first();
         
+            $comment_count = DB::table('comments')
+            ->select(DB::raw('COUNT(comments.id) as comment_count'))
+            ->where('comments.product_id', $id)
+            ->get()->first();
+            $comments = DB::table('comments')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->select('comments.*', 'users.username as username')
+            ->where('comments.product_id', $id)
+            ->get();
+        return view('user.product_detail')->with("product", $product)->with("branchId", $branch_id)->with('comment', $comment_count)->with('comments', $comments);
+    }
+
+    public function addToCard(Request $request) {
         $productId = $request->product_id;
         $branchId = $request->branch_id;
         $userId = auth()->user()->id;
@@ -141,9 +166,15 @@ class UserController extends Controller
             ]);
         }
         DB::table('cards')->where('user_id', '=', $userId)->delete();
-        $title = 'Welcome to University Magazine';
-        $body = 'Please check your account. you have new contribution in your department!';
-        Mail::to($coordinator->email)->send(new PushMail($title, $body));
+        $title = 'You have new order placement';
+        $body = 'Please check order request of your branch. you have new order placement in your branch!';
+        $user = User::find($branchId);
+        $details = [
+            'title' => $title,
+            'message' => $body
+        ];
+    
+        Mail::to($user->email)->send(new PushMail($details));
         return redirect('/orders')->with('success', 'Your order have been placed successfully.');
     }
 
@@ -185,5 +216,17 @@ class UserController extends Controller
         //dd($orderDetail[0]);
         //dd($item_count[0]);
         return view("user.order_detail")->with("order", $orderDetail[0])->with('order_items', $order_items)->with("item_count", $item_count[0]);
+    }
+
+    public function comment(Request $request) {
+        //dd($request);
+        $user_id = auth()->user()->id;
+        $order = Comment::create([
+            'user_id' => $user_id,
+            'product_id' => $request->product_id,
+            'comment' => $request->comment,
+            'status' => 1,
+        ]);
+        return back()->with('success', 'Comment have been successfully saved.');
     }
 }

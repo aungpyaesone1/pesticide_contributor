@@ -60,6 +60,15 @@ $productsNotOrdered = $productsNotOrdered->reject(function ($product) use ($excl
 
     public function requestStock(Request $request) {
         Stock::where("id", $request->id)->first()->update(array('request_count'=>$request->requestStock));
+        $title = 'You have new order placement';
+        $body = 'Please check order request of your branch. you have new order placement in your branch!';
+        $user = User::find($branchId);
+        $details = [
+            'title' => $title,
+            'message' => $body
+        ];
+    
+        Mail::to($user->email)->send(new PushMail($details));
         return redirect('/branch-user/stock/')->with('success','Stock has been requested successfully.');
     }
 

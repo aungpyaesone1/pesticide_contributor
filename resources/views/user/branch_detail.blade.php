@@ -159,7 +159,7 @@
             <div class="row">
             @foreach ($products as $cont)
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                    <a href="/post-detail">
+                    <a href="/product/{{$branch->id}}/{{$cont->id}}">
                         <div class="card-flyer">
                             <div class="text-box">
                                 <div class="image-box">

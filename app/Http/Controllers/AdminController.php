@@ -18,8 +18,9 @@ class AdminController extends Controller
     public function dashboard(Request $request) {
         $startDate = $request->input('start_date') ? $request->input('start_date') : Carbon::now()->startOfMonth()->toDateString();
         $endDate = $request->input('end_date') ? $request->input('end_date') : Carbon::now()->endOfMonth()->toDateString();
-        $branchId = auth()->user()->id;
-        $salesReport = DB::table('order_items')
+        $branchId = $request->input('branch_id');
+        if($branchId == null || $branchId == 'all') {
+            $salesReport = DB::table('order_items')
         ->join('products', 'order_items.product_id', '=', 'products.id')
         ->join('orders', 'order_items.order_id', '=', 'orders.id')
         ->whereBetween('orders.created_at', [$startDate, $endDate])
@@ -33,6 +34,27 @@ class AdminController extends Controller
     ->select('products.name')
     ->groupBy('products.name')
     ->get();
+        }
+        else {
+            $salesReport = DB::table('order_items')
+        ->join('products', 'order_items.product_id', '=', 'products.id')
+        ->join('orders', 'order_items.order_id', '=', 'orders.id')
+        ->whereBetween('orders.created_at', [$startDate, $endDate])
+        ->where('orders.status', 4)
+        ->where('orders.branch_id', $branchId)
+        ->select('products.name', DB::raw('SUM(order_items.count) as total_quantity'), DB::raw('SUM(order_items.price * order_items.count) as total_sales'))
+        ->groupBy('products.name')
+        ->get();
+        //dd($salesReport);
+        
+        $productsNotOrdered = DB::table('stocks')
+    ->join('products', 'stocks.product_id', '=', 'products.id')
+    ->where('stocks.branch_id', $branchId)
+    ->select('products.name', 'stocks.stock_level as stock_quantity')
+    ->groupBy('products.name', 'stocks.stock_level')
+    ->get();
+        }
+        
     // Example criteria to exclude specific product names
  // Example product names to exclude
 $excludedProducts = $salesReport->pluck('name');
@@ -41,9 +63,14 @@ $productsNotOrdered = $productsNotOrdered->reject(function ($product) use ($excl
     return in_array($product->name, $excludedProducts);
 });
     //dd($productsNotOrdered);
+    $branchs = DB::table('users')
+            ->where('status', 1)
+            ->where('role_id', 2)
+            ->select('users.*')
+            ->get();
 
 
-        return view('admin.dashboard')->with("saleReport", $salesReport)->with("productNotOrder", $productsNotOrdered);
+        return view('admin.dashboard')->with("saleReport", $salesReport)->with("productNotOrder", $productsNotOrdered)->with("branchs", $branchs);
     }
 
     public function branch() {

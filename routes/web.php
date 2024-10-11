@@ -75,12 +75,15 @@ Route::controller(UserController::class)->group(function() {
     Route::get('post-detail/{id}', 'postDetail');
     Route::get('/branch', 'branch');
     Route::get('/branch-detail/{id}', 'branchDetail');
+    Route::get('/product/{branch_id}/{id}', 'productDetail');
     Route::post('/add-to-card', 'addToCard')->name('add-to-card');
     Route::get('/cards', 'cards');
     Route::get('/remove-item/{id}', 'removeItem');
     Route::post('/checkout', 'checkOut')->name('checkout');
     Route::get('/orders', 'orderList');
     Route::get('order-detail/{id}', 'orderDetail');
+    Route::get('/about', 'about');
+    Route::post('/comment', 'comment')->name('comment');
 });
 
 Route::get('/', function () {

@@ -52,6 +52,8 @@ class AuthenticationController extends Controller
     }
 
     public function register(Request $request) {
+
+        
         $request->validate([
             'username' => 'required',
             'password' => 'required',
@@ -78,7 +80,7 @@ class AuthenticationController extends Controller
             'status' => 1
         ]);
         //dd($user);
-        return redirect()->route('/login')->with('success','You has been registered successfully.');
+        return redirect('/login')->with('success','You has been registered successfully.');
     }
 
     public function profile() {

@@ -1,6 +1,6 @@
 @extends('nav')
 @section('content')
-<div>
+<div style="padding-bottom:225px;border:0px solid red;">
 <div class="container">
 @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">

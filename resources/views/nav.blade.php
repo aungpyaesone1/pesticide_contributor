@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Agri</title>
+    <title>FarmSafe</title>
 
     <!-- Font Awesome -->
 <link
@@ -70,7 +70,7 @@
           <a class="nav-link" href="/orders">Order</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+          <a class="nav-link" href="/about">About</a>
         </li>
       </ul>
       <!-- Left links -->
@@ -84,34 +84,6 @@
         <i class="fas fa-shopping-cart"></i>
       </a>
 
-      <!-- Notifications -->
-      <div class="dropdown">
-        <a
-          data-mdb-dropdown-init
-          class="text-reset me-3 dropdown-toggle hidden-arrow"
-          href=""
-          id="navbarDropdownMenuLink"
-          role="button"
-          aria-expanded="false"
-        >
-          <i class="fas fa-bell"></i>
-          <span class="badge rounded-pill badge-notification bg-danger">1</span>
-        </a>
-        <ul
-          class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="navbarDropdownMenuLink"
-        >
-          <li>
-            <a class="dropdown-item" href="#">Some news</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">Another news</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </li>
-        </ul>
-      </div>
       <!-- Avatar -->
       <div class="dropdown">
         <a
@@ -140,9 +112,7 @@
           <li>
             <a class="dropdown-item" href="/orders">Order</a>
           </li>
-          <li>
-            <a class="dropdown-item" href="#">Settings</a>
-          </li>
+          
           <li>
             <a class="dropdown-item" href="/logout">Logout</a>
           </li>

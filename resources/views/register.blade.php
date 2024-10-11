@@ -45,6 +45,9 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
+                            @if ($errors->has('error'))
+                                    <span class="text-danger">{{ $errors->first('error') }}</span>
+                                    @endif
                             <form class="user" action="{{ route('post-register') }}" method="post">
                                     @csrf
                                 <div class="form-group row">

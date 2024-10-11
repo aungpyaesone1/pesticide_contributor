@@ -45,13 +45,14 @@
 
 </style>
 
-<div class="container">
+<div class="container" style="padding-bottom:225px;border:0px solid red;">
 @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
+</div>
+@endif
+
 <form action="{{ route('checkout') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal fade bd-example-modal-lg" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
