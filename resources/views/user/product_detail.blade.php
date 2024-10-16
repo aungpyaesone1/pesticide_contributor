@@ -52,16 +52,42 @@
              
 
               <div class="col-lg-6 text-center text-lg-end">
-              <form action="{{ route('add-to-card') }}" method="post">
-                                      @csrf
-                                      <input type="hidden" name="product_id" value="{{$product->id}}">
-                                      <input type="hidden" name="branch_id" value="{{$branchId}}">
-                                    <button type="submit" class="btn btn-primary">Add to card</button>
-                                    </form>
+              
+                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add to card</button>
+                            
               </div>
             </div>
           </section>
           <!--Section: Post data-mdb-->
+<div class="modal fade bd-example-modal-lg" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Input number of item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{ route('add-to-card') }}" method="post">
+                                      @csrf
+                                      
+      <div class="modal-body">
+      <input type="hidden" name="product_id" value="{{$product->id}}">
+      <input type="hidden" name="branch_id" value="{{$branchId}}">
+      <div class="form-group">
+        <label for="inputAddress">Number of item</label>
+      　<input type="number" name="count" class="form-control">
+      </div>
+        <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
 
           <!--Section: Text-->
           <section>
@@ -81,6 +107,7 @@
             </button>
           </section>
           <!--Section: Share buttons-->
+
 <div class="modal fade bd-example-modal-lg" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

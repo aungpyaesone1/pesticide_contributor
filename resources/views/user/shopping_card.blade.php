@@ -111,10 +111,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="divTableCol"><strong class="label label-warning"></strong></div>
+                <div class="divTableCol"><strong class="label label-warning">FarmSafe</strong></div>
                 <div class="divTableCol">
+                {{$cont->count}}
                     <input type="hidden" name="products[{{$index}}][id]" value="{{$cont->id}}"> 
-                    <input type="text" class="form-control" name="products[{{$index}}][quantity]" id="exampleInputEmail1" value="{{$cont->count}}" />
+                    <input type="hidden" class="form-control" name="products[{{$index}}][quantity]" id="exampleInputEmail1" value="{{$cont->count}}" />
                 </div>
                 <div class="divTableCol"><strong>{{$cont->price}} Kyats</strong></div>
                 <input type="hidden" name="products[{{$index}}][price]" value="{{$cont->price}}"> 
@@ -133,7 +134,7 @@
                 <div class="divTableCol">
                     <input type="hidden" value="{{$total}}" name="total_price">
                     <input type="hidden" value="{{$branch_id}}" name="branch_id">
-                    <h3><strong>{{$total}}</strong></h3>
+                    <h3><strong>{{$total}} Kyats</strong></h3>
                 </div>
                 <div class="divTableCol">
                     <a class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">Checkout</a>

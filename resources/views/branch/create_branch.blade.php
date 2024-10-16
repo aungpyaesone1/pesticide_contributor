@@ -32,6 +32,12 @@
 </div>
 <div class="form-row">
 <div class="form-group col-md-6">
+<label for="inputPassword4">Email</label>
+<input type="text" name="email" class="form-control" id="inputPassword4" placeholder="Email">
+</div>
+</div>
+<div class="form-row">
+<div class="form-group col-md-6">
 <label for="inputEmail4">Latitude</label>
 <input type="text" name="latitude" class="form-control" id="inputEmail4" placeholder="Latitude">
 </div>
@@ -61,6 +67,7 @@
 </select>
 </div>
 </div>
+
 
 
 <a href="/admin/branch" class="btn btn-secondary">Cancel</a>

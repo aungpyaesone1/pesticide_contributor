@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\ActivityLog;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use Hash;
@@ -25,6 +26,9 @@ class AuthenticationController extends Controller
             
             $request->session()->regenerate();
             if(Auth::user()->role_id == 1) {
+                ActivityLog::create([
+                    'user_id' => Auth::user()->id
+                ]);
                 return redirect('admin/dashboard')
                 ->withSuccess('You have successfully logged in!');
             }

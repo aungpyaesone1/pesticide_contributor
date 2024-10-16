@@ -108,6 +108,7 @@ class UserController extends Controller
     public function addToCard(Request $request) {
         $productId = $request->product_id;
         $branchId = $request->branch_id;
+        $count = $request->count;
         $userId = auth()->user()->id;
         
         $count = $request->count;
@@ -115,7 +116,7 @@ class UserController extends Controller
             'product_id' => $productId,
             'branch_id' => $branchId,
             'user_id' => $userId,
-            'count' => 1
+            'count' => $count
         ]);
         return back()->with('success', 'Item have been successfully added.');
     }

@@ -42,6 +42,7 @@ Route::controller(AdminController::class)->group(function() {
     
     Route::post('add-stock', 'addStock')->name('add-stock');
     Route::post('accept-request', 'acceptStockRequest')->name('accept-request');
+    Route::get('admin/activity', 'activity');
 });
 
 Route::controller(BranchController::class)->group(function() {

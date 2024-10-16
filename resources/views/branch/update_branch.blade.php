@@ -33,6 +33,12 @@
 </div>
 <div class="form-row">
 <div class="form-group col-md-6">
+<label for="inputPassword4">Email</label>
+<input type="text" name="email" class="form-control" id="inputPassword4" placeholder="Email" value="{{$branch->email}}">
+</div>
+</div>
+<div class="form-row">
+<div class="form-group col-md-6">
 <label for="inputEmail4">Latitude</label>
 <input type="text" class="form-control" id="inputEmail4" name="latitude" placeholder="Latitude" value="{{$branch->latitude}}">
 </div>

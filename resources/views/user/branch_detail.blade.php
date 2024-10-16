@@ -104,6 +104,9 @@
   color: #00acc1;
 }
     </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </header>
   <!--Main Navigation-->
 
@@ -159,12 +162,14 @@
             <div class="row">
             @foreach ($products as $cont)
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                    <a href="/product/{{$branch->id}}/{{$cont->id}}">
+                    
                         <div class="card-flyer">
                             <div class="text-box">
+                            <a href="/product/{{$branch->id}}/{{$cont->id}}">
                                 <div class="image-box">
                                     <img src="{{$cont->image}}" alt="" />
                                 </div>
+                            </a>
                                 <div class="text-container">
                                   <div style="text-align:justify;">
                                   <div class="row">
@@ -181,23 +186,48 @@
                                     <p style="text-align:justify;padding-left:20px;padding-right:20px;">&nbsp;&nbsp;&nbsp;{{$cont->short_description}}....</p>
                                   </div>
                                     <br/>
-                                    <form action="{{ route('add-to-card') }}" method="post">
-                                      @csrf
-                                      <input type="hidden" name="product_id" value="{{$cont->id}}">
-                                      <input type="hidden" name="branch_id" value="{{$branch->id}}">
-                                    <button type="submit" class="btn btn-primary">Add to card</button>
-                                    </form>
                                     
+                                      
+                                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#addModal-{{ $cont->id }}">Add to card</button>
+                                    
+<div class="modal fade bd-example-modal-lg" id="addModal-{{ $cont->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+ <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Input number of item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{ route('add-to-card') }}" method="post">
+                                      @csrf
+                                      
+      <div class="modal-body">
+      <input type="hidden" name="product_id" value="{{$cont->id}}">
+      <input type="hidden" name="branch_id" value="{{$branch->id}}">
+      <div class="form-group">
+        <label for="inputAddress" style="margin-left:-350px;">Number of item</label>
+      　<input type="number" name="count" class="form-control">
+      </div>
+        <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    
                 </div>
             @endforeach
             </div>
         </div>
        </div>
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+       
 <script>
     // This script will automatically close the alert after 5 seconds
     setTimeout(function() {

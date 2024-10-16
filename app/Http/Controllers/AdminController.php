@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use DB;
 use App\Models\City;
+use App\Models\ActivityLog;
 use App\Models\Township;
 use App\Models\Product;
 use App\Models\Category;
@@ -192,6 +193,14 @@ $productsNotOrdered = $productsNotOrdered->reject(function ($product) use ($excl
         return redirect('/admin/manage-stock/'.$stock->branch_id)->with('success','Stock request has been approved successfully.');
     }
 
+    public function activity() {
+        
+        $activity = DB::table('activity_logs')
+        ->join('users', 'activity_logs.user_id', '=', 'users.id')
+        ->select('activity_logs.*', 'users.username')->get();
+        
+        return view('admin/activity_log')->with('activity', $activity);
+    }
 
 
 }

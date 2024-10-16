@@ -20,6 +20,7 @@ class BranchController extends Controller
     }
 
     public function createBranch(Request $request) {
+        //dd($request);
         if (!Auth::check()) {
             return redirect("login")->withSuccess('You are not allowed to access');
         }
@@ -50,8 +51,9 @@ class BranchController extends Controller
             'address' => $request->address,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
-            'city_id' => 1,
-            'township_id' => 1,
+            'city_id' => $request->cityId,
+            'township_id' => $request->townshipId,
+            'email' => $request->email,
             'image' => $imageUrl,
             'role_id' => 2,
             'status' => 1
@@ -84,7 +86,7 @@ class BranchController extends Controller
 
         // Handle the response as needed
         $imageUrl = $result['data']['url'];
-        User::where("id", $request->id)->first()->update(array('username'=>$request->username, 'password'=>Hash::make($request->password), 'phone'=>$request->phone, 'latitude'=>$request->latitude, 'longitude'=>$request->longitude, 'address'=>$request->address, 'image'=>$imageUrl, 'city_id'=>$request->cityId, 'township_id'=>$request->townshipId));
+        User::where("id", $request->id)->first()->update(array('username'=>$request->username,'email'=>$request->email, 'password'=>Hash::make($request->password), 'phone'=>$request->phone, 'latitude'=>$request->latitude, 'longitude'=>$request->longitude, 'address'=>$request->address, 'image'=>$imageUrl, 'city_id'=>$request->cityId, 'township_id'=>$request->townshipId));
         return redirect('/admin/branch')->with('success','Branch has been updated successfully.');
     }
 
