@@ -8,7 +8,10 @@ use App\Models\Stock;
 use App\Models\Product;
 use App\Models\Order;
 use DB;
+use App\Models\User;
 use Carbon\Carbon;
+use App\Mail\PushMail;
+use Illuminate\Support\Facades\Mail;
 
 class BranchUserController extends Controller
 {
@@ -59,10 +62,11 @@ $productsNotOrdered = $productsNotOrdered->reject(function ($product) use ($excl
     }
 
     public function requestStock(Request $request) {
+        //dd($request);
         Stock::where("id", $request->id)->first()->update(array('request_count'=>$request->requestStock));
-        $title = 'You have new order placement';
-        $body = 'Please check order request of your branch. you have new order placement in your branch!';
-        $user = User::find($branchId);
+        $title = 'You have new stock request';
+        $body = 'Please check stock request from your branch. you have new stock request from your branch!';
+        $user = User::find(5);
         $details = [
             'title' => $title,
             'message' => $body

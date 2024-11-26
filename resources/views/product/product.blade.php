@@ -1,6 +1,12 @@
 @extends('welcome')
 @section('content')
 <div class="container-fluid">
+@if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Mange Product</h1>
@@ -57,9 +63,10 @@
       </div>
       
       <div class="modal-body">
-      <form action="" method="post">
+      <form action="{{ route('deleteproduct') }}" method="post">
+      <form  method="post">
         @csrf
-        <input type="hidden" name="stockId" value="{{$cont->id}}">
+        <input type="hidden" name="id" value="{{$cont->id}}">
         Are you sure to delete the product?
       </div>
       <div class="modal-footer">
@@ -85,4 +92,19 @@
                     </div>
 
                 </div>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+       
+       <script>
+           // This script will automatically close the alert after 5 seconds
+           setTimeout(function() {
+               let alert = document.querySelector('.alert');
+               if (alert) {
+                   let bootstrapAlert = new bootstrap.Alert(alert);
+                   bootstrapAlert.close();
+               }
+           }, 5000); // 5000 milliseconds = 5 seconds
+       </script>
 @endsection

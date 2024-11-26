@@ -81,7 +81,7 @@
       </div>
       
       <div class="modal-body">
-      <form action="{{ route('accept-request') }}" method="post" id="#{{$cont->id}}">
+      <form action="{{ route('accept-request') }}" method="post">
         @csrf
         <input type="hidden" name="stockId" value="{{$cont->id}}">
         Are you sure to approve the request?

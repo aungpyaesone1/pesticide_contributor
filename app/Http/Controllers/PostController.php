@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use DB;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -13,13 +14,8 @@ class PostController extends Controller
     }
 
     public function createPost(Request $request) {
-        if (!Auth::check()) {
-            return redirect("login")->withSuccess('You are not allowed to access');
-        }
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required'
-        ]);
+
+        
 
         $imagePath = $request->file('image')->getRealPath();
         $result = $this->uploadToImgBB($imagePath);
@@ -46,8 +42,9 @@ class PostController extends Controller
         return redirect('/admin/post')->with('success','Post has been created successfully.');
     }
 
-    public function deleteProduct() {
-        return redirect()->route('/product')->with('success','Product has been deleted successfully.');
+    public function deletePost(Request $request) {
+        DB::table('posts')->where('id', '=', $request->id)->delete();
+        return back()->with('success', 'Post has been deleted successfully.');
     }
 
     function uploadToImgBB($imagePath) 

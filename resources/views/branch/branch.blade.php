@@ -1,7 +1,12 @@
 @extends('welcome')
 @section('content')
 <div class="container-fluid">
-
+@if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Manage Branch</h1>
                     <p class="mb-4"></p>
@@ -55,8 +60,32 @@
                     <th>{{$cont->cityName}}</th>
                     <th>{{$cont->townshipName}}</th>
                     <th>{{$cont->created_at}}</th>
-                    <th><button class="btn btn-sm btn-danger">Delete</button></th>
+                    <th><button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#acceptModal-{{ $cont->id }}">Delete</button></th>
                 </tr>
+                <div class="modal fade" id="acceptModal-{{$cont->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+      <form action="{{ route('deletebranch') }}" method="post">
+        @csrf
+        <input type="hidden" name="id" value="{{$cont->id}}">
+        Are you sure to delete the branch?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Ok</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
                 
                                         @endforeach
                                         @else
@@ -71,4 +100,16 @@
                     </div>
 
                 </div>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+       
+<script>
+    // This script will automatically close the alert after 5 seconds
+    setTimeout(function() {
+        let alert = document.querySelector('.alert');
+        if (alert) {
+            let bootstrapAlert = new bootstrap.Alert(alert);
+            bootstrapAlert.close();
+        }
+    }, 5000); // 5000 milliseconds = 5 seconds
+</script>
 @endsection

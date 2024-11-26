@@ -12,6 +12,7 @@ use App\Models\Post;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Comment;
+use App\Models\Stock;
 use DB;
 use App\Mail\PushMail;
 use Illuminate\Support\Facades\Mail;
@@ -109,6 +110,13 @@ class UserController extends Controller
         $productId = $request->product_id;
         $branchId = $request->branch_id;
         $count = $request->count;
+        $stock = Stock::where('branch_id', $branchId)
+              ->where('product_id', $productId)
+              ->first();
+        if($stock->stock_level < $count) {
+            return back()->with('error', 'Sorry! Your item count exceed the our stock level. The maximun amount you can order is '+ $stock->stock_level);
+        }
+
         $userId = auth()->user()->id;
         
         $count = $request->count;
@@ -165,6 +173,13 @@ class UserController extends Controller
                 'price' => $product['price'],
                 'status' => 1
             ]);
+
+            $stock = Stock::where('branch_id', $branchId)
+              ->where('product_id', $product['id'])
+              ->first();
+              $new_stock = $stock->stock_level - $product['quantity'];
+              $stock->stock_level = $new_stock;
+              $stock->save();
         }
         DB::table('cards')->where('user_id', '=', $userId)->delete();
         $title = 'You have new order placement';
@@ -174,7 +189,7 @@ class UserController extends Controller
             'title' => $title,
             'message' => $body
         ];
-    
+        
         Mail::to($user->email)->send(new PushMail($details));
         return redirect('/orders')->with('success', 'Your order have been placed successfully.');
     }

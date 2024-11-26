@@ -41,7 +41,7 @@ Route::controller(AdminController::class)->group(function() {
     Route::get('admin/manage-stock/{id}', 'manageStock');
     
     Route::post('add-stock', 'addStock')->name('add-stock');
-    Route::post('accept-request', 'acceptStockRequest')->name('accept-request');
+    Route::post('accept-request1', 'acceptStockRequest')->name('accept-request');
     Route::get('admin/activity', 'activity');
 });
 
@@ -49,17 +49,20 @@ Route::controller(BranchController::class)->group(function() {
     Route::post('/branch', 'createBranch')->name('branch');
     Route::post('/updatebranch', 'updateBranch')->name('updatebranch');
     Route::get('/branch/{brach}/delete', 'deleteBranch')->name('branch-delete');
+    Route::post('/deletebranch', 'deleteBranch')->name('deletebranch');
     
 });
 
 Route::controller(ProductController::class)->group(function() {
     Route::post('/product', 'createProduct')->name('product');
     Route::post('/updateproduct', 'updateProduct')->name('updateproduct');
+    Route::post('/deleteproduct', 'deleteProduct')->name('deleteproduct');
 });
 
 Route::controller(PostController::class)->group(function() {
     Route::post('/post', 'createPost')->name('post');
     Route::post('/updatepost', 'updatePost')->name('updatepost');
+    Route::post('/deletepost', 'deletePost')->name('deletepost');
 });
 
 Route::controller(BranchUserController::class)->group(function() {

@@ -91,6 +91,7 @@ $productsNotOrdered = $productsNotOrdered->reject(function ($product) use ($excl
     public function createBranch() {
         $citys = City::all();
         $townships = Township::all();
+        //dd($townships);
         return view('branch.create_branch')->with("citys", $citys)->with("townships", $townships);
     }
 
@@ -184,6 +185,7 @@ $productsNotOrdered = $productsNotOrdered->reject(function ($product) use ($excl
     }
 
     public function acceptStockRequest(Request $request) {
+        //dd($request);
         $id = $request->stockId;
         $stock = Stock::find($id);
         $new_stock = $stock->stock_level + $stock->request_count;

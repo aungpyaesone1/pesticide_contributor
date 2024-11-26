@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Hash;
 use Session;
+use DB;
 
 class ProductController extends Controller
 {
@@ -60,8 +61,9 @@ class ProductController extends Controller
         return redirect('/admin/product')->with('success','Product has been created successfully.');
     }
 
-    public function deleteProduct() {
-        return redirect()->route('/product')->with('success','Product has been deleted successfully.');
+    public function deleteProduct(Request $request) {
+        DB::table('products')->where('id', '=', $request->id)->delete();
+        return back()->with('success', 'Product has been deleted successfully.');
     }
 
     function uploadToImgBB($imagePath) 

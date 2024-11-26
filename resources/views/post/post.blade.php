@@ -1,6 +1,12 @@
 @extends('welcome')
 @section('content')
 <div class="container-fluid">
+@if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Manage Post</h1>
@@ -55,9 +61,9 @@
       </div>
       
       <div class="modal-body">
-      <form action="" method="post">
+      <form action="{{ route('deletepost') }}" method="post">
         @csrf
-        <input type="hidden" name="stockId" value="{{$cont->id}}">
+        <input type="hidden" name="id" value="{{$cont->id}}">
         Are you sure to delete the post?
       </div>
       <div class="modal-footer">
@@ -83,4 +89,16 @@
                     </div>
 
                 </div>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+       
+<script>
+    // This script will automatically close the alert after 5 seconds
+    setTimeout(function() {
+        let alert = document.querySelector('.alert');
+        if (alert) {
+            let bootstrapAlert = new bootstrap.Alert(alert);
+            bootstrapAlert.close();
+        }
+    }, 5000); // 5000 milliseconds = 5 seconds
+</script>
 @endsection

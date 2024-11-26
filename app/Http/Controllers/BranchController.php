@@ -8,6 +8,7 @@ use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
 use Hash;
 use Session;
+use DB;
 
 class BranchController extends Controller
 {
@@ -90,8 +91,9 @@ class BranchController extends Controller
         return redirect('/admin/branch')->with('success','Branch has been updated successfully.');
     }
 
-    public function deleteBranch() {
-        return redirect('/admin/branch')->with('success','Branch has been deleted successfully.');
+    public function deleteBranch(Request $request) {
+        DB::table('users')->where('id', '=', $request->id)->delete();
+        return back()->with('success', 'Branch has been deleted successfully.');
     }
 
     function uploadToImgBB($imagePath) 
