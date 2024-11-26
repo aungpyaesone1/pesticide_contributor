@@ -71,6 +71,12 @@ php artisan serve
 
 11. import the database in localhost/phpmyadmin
 
+12. admin-credential - admin, 12345#
+
+13. branch-credential - Shwan Yi Pyae, 12345#
+
+14. customer-credential - June, 12345#
+
 ## ** Author **
 - Aung Pyae Sone
 
