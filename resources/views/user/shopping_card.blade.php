@@ -111,7 +111,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="divTableCol"><strong class="label label-warning">FarmSafe</strong></div>
+                <div class="divTableCol"><strong class="label label-warning">FarmCare</strong></div>
                 <div class="divTableCol">
                 {{$cont->count}}
                     <input type="hidden" name="products[{{$index}}][id]" value="{{$cont->id}}"> 

@@ -161,7 +161,7 @@ ul {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section_title_all text-center">
-                            <h3 class="font-weight-bold">Welcome To <span class="text-custom">FarmSafe</span></h3>
+                            <h3 class="font-weight-bold">Welcome To <span class="text-custom">FarmCare</span></h3>
                             <p class="section_subtitle mx-auto text-muted">Your trusted partner in providing high-quality pesticide products across the country.</p>
                             <div class="">
                                 <i class=""></i>
@@ -177,7 +177,7 @@ ul {
                                 <p class="text_custom font-weight-bold">Who We Are</p>
                             </div>
                             <h4 class="about_heading text-capitalize font-weight-bold mt-4">Customer Satisfaction: Our Priority</h4>
-                            <p class="text-muted mt-3">Welcome to FarmSafe, your trusted partner in providing high-quality pesticide products across the country.</p>
+                            <p class="text-muted mt-3">Welcome to FarmCare, your trusted partner in providing high-quality pesticide products across the country.</p>
 
                             <p class="text-muted mt-3"> With a commitment to excellence and a deep understanding of agricultural needs, we have grown into one of the leading online platforms for pesticide distribution, offering a wide range of products to ensure the best protection for your crops.</p>
                         </div>

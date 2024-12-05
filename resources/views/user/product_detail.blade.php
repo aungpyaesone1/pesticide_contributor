@@ -46,7 +46,7 @@
                 <img src="{{asset('img/chemical (1).png')}}" class="rounded shadow-1-strong me-2"
                   height="35" alt="" loading="lazy" />
                 <span> Posted on <u>1{{$product->created_at}}</u> by</span>
-                <a href="" class="text-dark">FarmSafe</a>
+                <a href="" class="text-dark">FarmCare</a>
                 <br>
               </div>
              

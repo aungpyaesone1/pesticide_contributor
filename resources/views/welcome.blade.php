@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>FarmSafe</title>
+    <title>FarmCare</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -46,7 +46,7 @@
           loading="lazy"
         />
                 </div>
-                <div class="sidebar-brand-text mx-3">FARMSAFE<sup></sup></div>
+                <div class="sidebar-brand-text mx-3">FARMCARE<sup></sup></div>
             </a>
 
             <!-- Divider -->
